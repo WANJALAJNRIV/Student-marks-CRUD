@@ -13,3 +13,9 @@ class EditStudentForm(forms.ModelForm):
         fields = ('name', 'registeration_number', 'major_course_of_study')
 
 
+class StudentMarks(forms.Form):
+    cat_1 = forms.IntegerField(label="Cat 1", max_value=30)
+    cat_2 = forms.IntegerField(label="Cat 2", max_value=30)
+    cat_3 = forms.IntegerField(label="Cat 3", max_value=30)
+    final_exam = forms.IntegerField(label="Final Exam ", max_value=70)
+

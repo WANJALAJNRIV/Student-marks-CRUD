@@ -1,13 +1,13 @@
- {% load static %}
+{% load static %}
 <Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
 
 
-<button><a href="{% url 'add_class' %}" > Add Class </a></button>
 <table>
     <tr>
         <th>Id</th>
         <th> Class Name</th>
         <th>Unit Code</th>
+        <th> Add to class </th>
 
     </tr>
     {% for unit_class in classes %}
@@ -17,13 +17,7 @@
         <td>{{ unit_class.class_name }}</td>
         <td>{{ unit_class.unit_code }}</td>
         <td>
-            <a href="{% url 'edit_class' id=unit_class.id%}">Edit</a>          
-        </td>
-        <td>
-            <a href="{% url 'delete_class' id=unit_class.id%}"> Delete </a>
-        </td>
-        <td>
-            <a href="{% url 'all_available_courses' id=unit_class.id%}"> Delete </a>
+            <a href="{% url 'add_to_class' class_name=unit_class.class_name%}"> Add </a>          
         </td>
 
     </tr>

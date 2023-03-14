@@ -1,0 +1,29 @@
+{% load static %}
+<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th> Class Name</th>
+        <th>Unit Code</th>
+        <th> Add to class </th>
+
+    </tr>
+    {% for course in courses %}
+
+    <tr>
+        <td>{{ unit_class.id}}</td>
+        <td>{{ courses.class_name }}</td>
+        <td>{{ courses.unit_code }}</td>
+        <td>
+            <a href="{% url 'add_students_to_class' course_name=unit_class.class_name%}"> Add </a>          
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+    
+
+

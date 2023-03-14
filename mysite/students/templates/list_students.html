@@ -11,6 +11,7 @@
         <th> Major course of study </th>
         <th> Edit </th>
         <th>delete</th>
+        <th> Add to class </th>
 
     </tr>
     {% for student in students %}
@@ -27,6 +28,12 @@
             <a href="{% url 'delete_student' id=student.id%}"> Delete </a>
 
         </td>
+        <td>
+            <a href={% url 'all_available_classes' id=student,id %}> Add </a>
+        </td>
+        <td>
+            <a href={% url 'add_marks' id=student,id %}> Add </a>
+        </td> 
 
     </tr>
     {% endfor %}
