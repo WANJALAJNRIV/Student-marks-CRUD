@@ -12,6 +12,7 @@
         <th> Edit </th>
         <th>delete</th>
         <th> Add to class </th>
+        <th> Enter Marks </th>
 
     </tr>
     {% for student in students %}
@@ -29,10 +30,10 @@
 
         </td>
         <td>
-            <a href={% url 'all_available_classes' id=student,id %}> Add </a>
+            <a href={% url 'all_available_classes' id=student.id %}> Add </a>
         </td>
         <td>
-            <a href={% url 'add_marks' id=student,id %}> Add </a>
+            <a href={% url 'add_marks' id=student.id %}> Add </a>
         </td> 
 
     </tr>

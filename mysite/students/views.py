@@ -3,8 +3,9 @@ from .models import Student
 from .forms import NewStudentForm, EditStudentForm, StudentMarks
 from django.shortcuts import redirect, get_list_or_404, get_object_or_404
 from Class.models import Class, ClassEnrollment
+import urllib.parse
 
-student_in_place = None
+
 
 
 def list_students(request):
@@ -47,16 +48,37 @@ def delete_student(request, id):
     return redirect('list_students')
 
 
+registration_number_global = None
+
+
 def all_available_classes(request, id):
+    global registration_number_global
     classes = Class.objects.all()
     context = {'classes': classes}
     student_in_place = get_object_or_404(Student, id=id)
+    # registration_number = student_in_place.registeration_number
+    # context['registration_number'] = student_in_place.registeration_number
+    registration_number_global = student_in_place.registeration_number
     return render(request, 'add_student_to_class.html', context)
 
-def add_to_class(request, class_name ):
-    new_enrollment = ClassEnrollment( student_reg_no=student_in_place.registeration_number, class_name=class_name, cat1=0, cat2=0, cat3 =0, final_exam=0)
-    new_enrollment.save()
-    return redirect('all_available_classes')
+
+def add_one_student_to_class(request, class_name, registration_number):
+    if registration_number_global:
+        new_enrollment = ClassEnrollment( student_reg_no=registration_number, class_name=class_name, cat1=0, cat2=0, cat3 =0, final_exam=0)
+        new_enrollment.save()
+        return redirect('list_units')
+    else:
+        return redirect('list_students')
+
+def add_one_student_to_class_2(request, class_name):
+    if registration_number_global:
+        new_enrollment = ClassEnrollment( student_reg_no=registration_number_global, class_name=class_name, cat1=0, cat2=0, cat3 =0, final_exam=0)
+        new_enrollment.save()
+        return redirect('all_available_classes')
+    else:
+        return redirect('list_students')
+
+
 
 
 def add_marks(request, id ):
@@ -64,7 +86,7 @@ def add_marks(request, id ):
     if request.method == 'POST':
         enrollment = get_object_or_404(ClassEnrollment, id=id)
 
-        form  = NewStudentForm(request.POST)
+        form  = StudentMarks(request.POST)
 
         if form.is_valid():
             enrollment.cat1 = form.cleaned_data['cat_1']
@@ -73,10 +95,10 @@ def add_marks(request, id ):
             enrollment.save()
             return redirect('list_students')
     else:
-        form = NewStudentForm()
+        form = StudentMarks()
         context={'form': form}
         return render(request, 'add_marks.html', context)
-
+'''
 from django.http import HttpResponse
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
@@ -108,7 +130,7 @@ def generate_marks_pdf(request, student_name, cat1, cat2, cat3):
 
     return response
 
-
+'''
 
 
 
