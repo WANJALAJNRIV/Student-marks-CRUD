@@ -1,0 +1,8 @@
+<!-- add_student.html -->
+<h1>Update Class</h1>
+
+<form action = "" method = "post">
+  {% csrf_token %}
+  {{ form.as_table }}
+  <input type="submit" value= "Submit">
+</form>

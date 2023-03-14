@@ -1,0 +1,33 @@
+ {% load static %}
+<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+
+
+<button><a href="{% url 'add_unit' %}" > Add Unit </a></button>
+<table>
+    <tr>
+        <th>Id</th>
+        <th> Code</th>
+        <th>Title</th>
+
+    </tr>
+    {% for unit in units %}
+
+    <tr>
+        <td>{{ unit.id}}</td>
+        <td>{{ unit.code }}</td>
+        <td>{{ unit.title }}</td>
+        
+        <td>
+            <a href="{% url 'edit_unit' id=unit.id%}">Edit</a>          
+        </td>
+        <td>
+            <a href="{% url 'delete_unit' id=unit.id%}"> Delete </a>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+    
+
+

@@ -16,11 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from students.views import add_student, list_students, delete_student, edit_student
-
+from unit.views import add_unit, list_units, delete_unit, edit_unit
+from Class.views import add_class, list_classes, delete_class, edit_class
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('students/add/', add_student, name='add_student'),
-    path('students/list', list_students, name='list_students'),
-    path('student/delete/<str:registeration_number>/', delete_student, name='delete_student'),
-    path('student/edit/<str:registeration_number>', edit_student, name='edit_student'),
+    path('student/add/', add_student, name='add_student'),
+    path('student/list', list_students, name='list_students'),
+    path('student/delete/<int:id>/', delete_student, name='delete_student'),
+    path('student/edit/<int:id>', edit_student, name='edit_student'),
+
+    path('unit/add/', add_unit, name='add_unit'),
+    path('unit/list', list_units, name='list_units'),
+    path('unit/delete/<int:id>/', delete_unit, name='delete_unit'),
+    path('unit/edit/<int:id>', edit_unit, name='edit_unit'),
+
+     path('class/add/', add_class, name='add_class'),
+    path('class/list', list_classes, name='list_classes'),
+    path('class/delete/<int:id>/', delete_class, name='delete_class'),
+    path('class/edit/<int:id>', edit_class, name='edit_class')
 ]
