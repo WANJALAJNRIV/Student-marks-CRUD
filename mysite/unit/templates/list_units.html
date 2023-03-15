@@ -1,13 +1,19 @@
- {% load static %}
-<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+{% extends 'base.html' %}
+
+
+{% block title %} Student List {% endblock%}
+
+{% block content %}
 
 
 <button><a href="{% url 'add_unit' %}" > Add Unit </a></button>
-<table>
+<table class="table table-striped">
     <tr>
         <th>Id</th>
         <th> Code</th>
         <th>Title</th>
+        <th> Edit Unit</th>
+        <th> Delete Unit </th>
 
     </tr>
     {% for unit in units %}
@@ -27,7 +33,7 @@
     </tr>
     {% endfor %}
 </table>
-
+{% endblock %}
     
 
 

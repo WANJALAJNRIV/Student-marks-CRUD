@@ -5,6 +5,11 @@ from django.shortcuts import redirect, get_list_or_404, get_object_or_404
 from Class.models import Class, ClassEnrollment
 
 
+
+def index(request):
+     return render(request, 'index.html')
+
+
 def list_students(request):
     students = Student.objects.all()
     context = {'students':students}
@@ -56,7 +61,7 @@ def add_one_student_to_class(request, class_id, student_id):
     current_student = get_object_or_404(Student, id=student_id)
     new_enrollment = ClassEnrollment( student_reg_no=current_student.registeration_number, class_name=new_class.class_name, cat1=0, cat2=0, cat3 =0, final_exam=0)
     new_enrollment.save()
-    return redirect('list_units')
+    return redirect('enrolled_classes', student_id=student_id )
 
 
 def add_marks(request, id ):
@@ -64,12 +69,15 @@ def add_marks(request, id ):
     enrollment = get_object_or_404(ClassEnrollment, id=id)
     if request.method == 'POST':
         form  = StudentMarks(request.POST)
-        if form.is_valid():
+        if form.is_valid():          
             enrollment.cat1 = form.cleaned_data['cat_1']
             enrollment.cat2 = form.cleaned_data['cat_2']
             enrollment.cat3 = form.cleaned_data['cat_3']
+            enrollment.final_exam = form.cleaned_data['final_exam']
             enrollment.save()
-            return redirect('list_students')
+
+            Student_object = Student.objects.get(registeration_number=enrollment.student_reg_no)
+            return redirect('enrolled_classes', student_id=Student_object.id )
     else:
         form = StudentMarks()
         form.cat_1 = enrollment.cat1
@@ -81,14 +89,18 @@ def add_marks(request, id ):
     
 
 def enrolled_classes(request, student_id):
-     current_student = get_object_or_404(Student, id=student_id)
-     all_enrolled_classes = get_list_or_404(ClassEnrollment, student_reg_no=current_student.registeration_number)
-     context = {'classes' : all_enrolled_classes, 'student':current_student}
-     return render(request, 'enrolled_classes.html', context)
+    try:
+        current_student = Student.objects.get(id=student_id)
+        all_enrolled_classes = ClassEnrollment.objects.filter(student_reg_no=current_student.registeration_number)
+    except ClassEnrollment.DoesNotExist:
+        all_enrolled_classes = None
+        
+    context = {'classes' : all_enrolled_classes, 'student':current_student}
+    return render(request, 'enrolled_classes.html', context)
 
 
+def generate_mark_sheet( request, id):
+    enrollment = get_object_or_404(ClassEnrollment, id=id)
 
-
-    
     
 

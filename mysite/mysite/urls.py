@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from students.views import add_student, list_students, delete_student, edit_student, add_marks, add_one_student_to_class, all_available_classes, add_one_student_to_class, enrolled_classes
+from students.views import add_student, list_students, delete_student, edit_student, add_marks, add_one_student_to_class, all_available_classes, add_one_student_to_class, enrolled_classes, index
 from unit.views import add_unit, list_units, delete_unit, edit_unit
 from Class.views import add_class, list_classes, delete_class, edit_class, all_available_courses,add_students_to_class
 from django.urls import re_path
@@ -8,6 +8,7 @@ from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index, name='index'),
     path('student/add/', add_student, name='add_student'),
     path('student/list', list_students, name='list_students'),
     path('student/delete/<int:id>/', delete_student, name='delete_student'),

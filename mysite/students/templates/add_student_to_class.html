@@ -2,6 +2,11 @@
 <Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
 
 
+    <button><a href='{% url 'list_students' %}' >Students</a></button>
+        <button><a href = '{% url 'list_classes' %}' > Classes</a></button>
+        <button><a  href = '{% url 'list_units' %}' > Units</a></button>
+    <hr>
+
 <table>
     <tr>
         <th>Id</th>
@@ -17,7 +22,7 @@
         <td>{{ unit_class.class_name }}</td>
         <td>{{ unit_class.unit_code }}</td>
         <td>
-              <a href="{% url 'add_one_student_to_class' class_id=unit_class.id student_id=id_number %}"> try this </a>         
+              <a href="{% url 'add_one_student_to_class' class_id=unit_class.id student_id=id_number %}"> Add </a>         
         </td>
 
     </tr>

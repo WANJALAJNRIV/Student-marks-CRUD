@@ -1,13 +1,22 @@
- {% load static %}
-<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+{% extends 'base.html' %}
 
 
-<button><a href="{% url 'add_class' %}" > Add Class </a></button>
-<table>
+{% block title %} Student List {% endblock%}
+
+{% block content %}
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-primary" type="button" style="margin:20px;margin-right:20%"> <a href="{% url 'add_class' %}" class="link-dark">Create Class </a> </button>
+  </div>
+
+
+<table class="table table-striped" >
     <tr>
         <th>Id</th>
         <th> Class Name</th>
         <th>Unit Code</th>
+        <th> Edit</th>
+        <th> Delete <th>
 
     </tr>
     {% for unit_class in classes %}
@@ -23,7 +32,7 @@
             <a href="{% url 'delete_class' id=unit_class.id%}"> Delete </a>
         </td>
         <td>
-            <a href="{% url 'all_available_courses' id=unit_class.id%}"> Delete </a>
+          <!--  <a href="{% url 'all_available_courses' id=unit_class.id%}"> Delete </a>-->
         </td>
 
     </tr>
@@ -33,3 +42,4 @@
     
 
 
+{% endblock %}

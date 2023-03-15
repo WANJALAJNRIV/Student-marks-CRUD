@@ -1,4 +1,11 @@
 {% load static %}
+
+
+<button><a href='{% url 'list_students' %}' >Students</a></button>
+<button><a href = '{% url 'list_classes' %}' > Classes</a></button>
+<button><a  href = '{% url 'list_units' %}' > Units</a></button>
+<hr> 
+
 <Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
 
 

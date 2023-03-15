@@ -1,9 +1,16 @@
- {% load static %}
-<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+{% extends 'base.html' %}
 
+{% block title %} Student List {% endblock%}
 
-<button><a href="{% url 'add_student' %}" > Add student </a></button>
-<table>
+{% block content %}
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+   
+    <button class="btn btn-primary" type="button" style="margin:20px;margin-right:20%"> <a href="{% url 'add_student' %}" class="link-dark">Add student</a> </button>
+  </div>
+
+<h1> Student List </h1>
+<table class="table table-striped" style="margin:20px">
     <tr>
         <th>Id</th>
         <th> Name</th>
@@ -36,6 +43,8 @@
     </tr>
     {% endfor %}
 </table>
+
+{% endblock %}
 
     
 

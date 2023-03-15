@@ -8,8 +8,4 @@ class Student(models.Model):
 
     def __str_(self):
         return self.registeration_number
-
-    def __str__(self):
-        return self.registeration_number
-
     

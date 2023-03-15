@@ -1,39 +1,51 @@
-{% load static %}
-<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+{% extends 'base.html' %}
+
+
+{% block title %} Student List {% endblock%}
+
+{% block content %}
 
 
     <td>
-        <a href={% url 'all_available_classes' id=student.id %}> Add </a>
+        <a href={% url 'all_available_classes' id=student.id %}> Add to class</a>
     </td>
 
-
-<table>
+    {% if classes %}
+<table class="table table-striped">
     <tr>
-       
+        <th># </th>
+        <th> Name </th>
         <th>Registeration Number</th>
         <th> Class Name</th>
         <th> Cat 1</th>
         <th> Cat 2</th>
         <th> Cat 3 </th>
         <th> Final Exam Marks </th>
+        <th> Add marks </th> 
+        <th>Mark sheet</th>
 
     </tr>
-    {% for class in classes %}
-    <tr>
-        <td>{{ class.student_reg_no }}</td>
-        <td>{{ class.class_name }}</td>
-        <td> {{ class.cat1 }}</td>
-        <td> {{ class.cat2 }}</td>
-        <td> {{ class.cat3 }}</td>
-        <td> {{ class.final_exam }}</td>
-        <td> {{ class.id }}</td>
-        <td>
-            <a href={% url 'add_marks' id=class.id %}> Add </a>
-        </td> 
-    </tr>
-    {% endfor %}
+  
+        {% for class in classes %}
+        <tr>
+            <td> {{ class.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ class.student_reg_no }}</td>
+            <td>{{ class.class_name }}</td>
+            <td> {{ class.cat1 }}</td>
+            <td> {{ class.cat2 }}</td>
+            <td> {{ class.cat3 }}</td>
+            <td> {{ class.final_exam }}</td>
+            <td>
+                <a href={% url 'add_marks' id=class.id %}> Add </a>
+            </td> 
+        </tr>
+        {% endfor %}
+    {% else%}
+        <h3>Not Enrolled in any classes <h3>
+    {%  endif %}
 </table>
 
     
-
+{% endblock %}
 
