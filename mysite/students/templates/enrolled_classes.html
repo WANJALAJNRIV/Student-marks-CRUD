@@ -1,0 +1,39 @@
+{% load static %}
+<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+
+
+    <td>
+        <a href={% url 'all_available_classes' id=student.id %}> Add </a>
+    </td>
+
+
+<table>
+    <tr>
+       
+        <th>Registeration Number</th>
+        <th> Class Name</th>
+        <th> Cat 1</th>
+        <th> Cat 2</th>
+        <th> Cat 3 </th>
+        <th> Final Exam Marks </th>
+
+    </tr>
+    {% for class in classes %}
+    <tr>
+        <td>{{ class.student_reg_no }}</td>
+        <td>{{ class.class_name }}</td>
+        <td> {{ class.cat1 }}</td>
+        <td> {{ class.cat2 }}</td>
+        <td> {{ class.cat3 }}</td>
+        <td> {{ class.final_exam }}</td>
+        <td> {{ class.id }}</td>
+        <td>
+            <a href={% url 'add_marks' id=class.id %}> Add </a>
+        </td> 
+    </tr>
+    {% endfor %}
+</table>
+
+    
+
+

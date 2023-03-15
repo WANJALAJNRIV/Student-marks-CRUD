@@ -9,10 +9,10 @@
         <th> Name</th>
         <th>Registeration Number</th>
         <th> Major course of study </th>
-        <th> Edit </th>
-        <th>delete</th>
-        <th> Add to class </th>
-        <th> Enter Marks </th>
+        <th> Edit Student </th>
+        <th>delete Student</th>
+        <th> Enroled classes </th>
+    
 
     </tr>
     {% for student in students %}
@@ -30,11 +30,8 @@
 
         </td>
         <td>
-            <a href={% url 'all_available_classes' id=student.id %}> Add </a>
+            <a href="{% url 'enrolled_classes' student_id=student.id %}">Enrolled classes</a>
         </td>
-        <td>
-            <a href={% url 'add_marks' id=student.id %}> Add </a>
-        </td> 
 
     </tr>
     {% endfor %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from students.views import add_student, list_students, delete_student, edit_student, add_marks, add_one_student_to_class, all_available_classes, add_one_student_to_class_2
+from students.views import add_student, list_students, delete_student, edit_student, add_marks, add_one_student_to_class, all_available_classes, add_one_student_to_class, enrolled_classes
 from unit.views import add_unit, list_units, delete_unit, edit_unit
 from Class.views import add_class, list_classes, delete_class, edit_class, all_available_courses,add_students_to_class
 from django.urls import re_path
@@ -13,10 +13,9 @@ urlpatterns = [
     path('student/delete/<int:id>/', delete_student, name='delete_student'),
     path('student/edit/<int:id>', edit_student, name='edit_student'),
     path('student/availableclasses/<int:id>', all_available_classes, name='all_available_classes'),
-    path('student/addtoclass/<str:class_name>/', add_one_student_to_class_2, name='add_one_student_to_class_2'),
+    path('student/addtoclass/<int:class_id>/<int:student_id>/', add_one_student_to_class, name='add_one_student_to_class'),
     path('student/addmarks/<int:id>', add_marks, name='add_marks'),
-    re_path(r'^student/addtoclass/(?P<class_name>[\w-]+)/(?P<registration_number>[A-Za-z0-9\-\/]+)/$', add_one_student_to_class, name='add_one_student_to_class'), 
-
+    path('student/enrolledclasses/<int:student_id>', enrolled_classes, name='enrolled_classes'),
      
     path('unit/add/', add_unit, name='add_unit'),
     path('unit/list', list_units, name='list_units'),

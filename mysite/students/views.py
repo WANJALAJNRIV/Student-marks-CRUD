@@ -3,9 +3,6 @@ from .models import Student
 from .forms import NewStudentForm, EditStudentForm, StudentMarks
 from django.shortcuts import redirect, get_list_or_404, get_object_or_404
 from Class.models import Class, ClassEnrollment
-import urllib.parse
-
-
 
 
 def list_students(request):
@@ -28,7 +25,7 @@ def add_student(request):
 
 def edit_student(request, id):
     student = get_object_or_404(Student, id=id) 
-    
+
     if request.method == 'POST':
         form  = EditStudentForm(request.POST, instance=student)
         if form.is_valid():
@@ -37,9 +34,7 @@ def edit_student(request, id):
     else:
         form = EditStudentForm(instance=student)
         context={"form":form }
-        return render(request, 'update_student.html', context)
-
-     
+        return render(request, 'update_student.html', context)  
     return redirect('list_students')
 
 def delete_student(request, id):
@@ -48,46 +43,27 @@ def delete_student(request, id):
     return redirect('list_students')
 
 
-registration_number_global = None
-
-
 def all_available_classes(request, id):
-    global registration_number_global
     classes = Class.objects.all()
     context = {'classes': classes}
     student_in_place = get_object_or_404(Student, id=id)
-    # registration_number = student_in_place.registeration_number
-    # context['registration_number'] = student_in_place.registeration_number
-    registration_number_global = student_in_place.registeration_number
+    context['id_number'] = student_in_place.id
     return render(request, 'add_student_to_class.html', context)
 
 
-def add_one_student_to_class(request, class_name, registration_number):
-    if registration_number_global:
-        new_enrollment = ClassEnrollment( student_reg_no=registration_number, class_name=class_name, cat1=0, cat2=0, cat3 =0, final_exam=0)
-        new_enrollment.save()
-        return redirect('list_units')
-    else:
-        return redirect('list_students')
-
-def add_one_student_to_class_2(request, class_name):
-    if registration_number_global:
-        new_enrollment = ClassEnrollment( student_reg_no=registration_number_global, class_name=class_name, cat1=0, cat2=0, cat3 =0, final_exam=0)
-        new_enrollment.save()
-        return redirect('all_available_classes')
-    else:
-        return redirect('list_students')
-
-
+def add_one_student_to_class(request, class_id, student_id):
+    new_class = get_object_or_404(Class, id=class_id)
+    current_student = get_object_or_404(Student, id=student_id)
+    new_enrollment = ClassEnrollment( student_reg_no=current_student.registeration_number, class_name=new_class.class_name, cat1=0, cat2=0, cat3 =0, final_exam=0)
+    new_enrollment.save()
+    return redirect('list_units')
 
 
 def add_marks(request, id ):
-    
+
+    enrollment = get_object_or_404(ClassEnrollment, id=id)
     if request.method == 'POST':
-        enrollment = get_object_or_404(ClassEnrollment, id=id)
-
         form  = StudentMarks(request.POST)
-
         if form.is_valid():
             enrollment.cat1 = form.cleaned_data['cat_1']
             enrollment.cat2 = form.cleaned_data['cat_2']
@@ -96,42 +72,19 @@ def add_marks(request, id ):
             return redirect('list_students')
     else:
         form = StudentMarks()
+        form.cat_1 = enrollment.cat1
+        form.cat_2 = enrollment.cat2
+        form.cat_3 = enrollment.cat3
+        form.final_exam = enrollment.final_exam
         context={'form': form}
         return render(request, 'add_marks.html', context)
-'''
-from django.http import HttpResponse
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.units import inch
-from reportlab.pdfgen import canvas
-import io
+    
 
-def generate_marks_pdf(request, student_name, cat1, cat2, cat3):
-    # Create a new buffer for the PDF file
-    buffer = io.BytesIO()
-
-    # Create a new PDF file
-    pdf_file = canvas.Canvas(buffer, pagesize=letter)
-
-    # Add content to the PDF file
-    pdf_file.drawString(1*inch, 10*inch, 'Name: {}'.format(student_name))
-    pdf_file.drawString(1*inch, 9*inch, 'Cat 1: {}'.format(cat1))
-    pdf_file.drawString(1*inch, 8*inch, 'Cat 2: {}'.format(cat2))
-    pdf_file.drawString(1*inch, 7*inch, 'Cat 3: {}'.format(cat3))
-
-    # Save the PDF file
-    pdf_file.save()
-
-    # Set the buffer's file pointer at the beginning
-    buffer.seek(0)
-
-    # Create a new HTTP response with the PDF file as an attachment
-    response = HttpResponse(buffer, content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="marks.pdf"'
-
-    return response
-
-'''
-
+def enrolled_classes(request, student_id):
+     current_student = get_object_or_404(Student, id=student_id)
+     all_enrolled_classes = get_list_or_404(ClassEnrollment, student_reg_no=current_student.registeration_number)
+     context = {'classes' : all_enrolled_classes, 'student':current_student}
+     return render(request, 'enrolled_classes.html', context)
 
 
 
