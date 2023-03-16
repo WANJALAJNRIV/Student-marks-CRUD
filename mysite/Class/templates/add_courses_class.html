@@ -1,13 +1,12 @@
-{% load static %}
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
 
 
-<button><a href='{% url 'list_students' %}' >Students</a></button>
-<button><a href = '{% url 'list_classes' %}' > Classes</a></button>
-<button><a  href = '{% url 'list_units' %}' > Units</a></button>
-<hr> 
+{% extends 'base.html' %}
 
-<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+{% block title %} Classes {% endblock%}
 
+{% block content %}
 
 <table>
     <tr>
@@ -31,6 +30,8 @@
     {% endfor %}
 </table>
 
+
+{% endblock %}
     
 
 

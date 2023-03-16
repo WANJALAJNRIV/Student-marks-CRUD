@@ -1,9 +1,11 @@
+#Wanjala Stephen David
+# IN16/00055/20
+
 from django.contrib import admin
 from django.urls import path
-from students.views import add_student, list_students, delete_student, edit_student, add_marks, add_one_student_to_class, all_available_classes, add_one_student_to_class, enrolled_classes, index
+from students.views import add_student, list_students, delete_student, edit_student, add_marks, add_one_student_to_class, all_available_classes, add_one_student_to_class, enrolled_classes, index, generate_mark_sheet
 from unit.views import add_unit, list_units, delete_unit, edit_unit
 from Class.views import add_class, list_classes, delete_class, edit_class, all_available_courses,add_students_to_class
-from django.urls import re_path
 
 
 urlpatterns = [
@@ -17,7 +19,8 @@ urlpatterns = [
     path('student/addtoclass/<int:class_id>/<int:student_id>/', add_one_student_to_class, name='add_one_student_to_class'),
     path('student/addmarks/<int:id>', add_marks, name='add_marks'),
     path('student/enrolledclasses/<int:student_id>', enrolled_classes, name='enrolled_classes'),
-     
+    path("student/marksheet/<int:student_id>/<int:class_id>", generate_mark_sheet, name="generate_mark_sheet"), 
+
     path('unit/add/', add_unit, name='add_unit'),
     path('unit/list', list_units, name='list_units'),
     path('unit/delete/<int:id>/', delete_unit, name='delete_unit'),

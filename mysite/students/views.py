@@ -1,3 +1,6 @@
+#Wanjala Stephen David
+# IN16/00055/20
+
 from django.shortcuts import render, redirect
 from .models import Student
 from .forms import NewStudentForm, EditStudentForm, StudentMarks
@@ -99,8 +102,17 @@ def enrolled_classes(request, student_id):
     return render(request, 'enrolled_classes.html', context)
 
 
-def generate_mark_sheet( request, id):
-    enrollment = get_object_or_404(ClassEnrollment, id=id)
+def generate_mark_sheet( request, student_id, class_id):
+    try:
+        current_student = Student.objects.get(id=student_id)
+        current_class = ClassEnrollment.objects.get(id=class_id)
+
+        total_marks = current_class.cat1+ current_class.cat2+current_class.cat3+current_class.final_exam
+    except ClassEnrollment.DoesNotExist:
+        all_enrolled_classes = None
+        
+    context = {'classes' : current_class, 'student':current_student, 'total_marks':total_marks}
+    return render(request, 'marksheet.html', context)
 
     
 

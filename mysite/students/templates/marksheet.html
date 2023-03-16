@@ -1,0 +1,51 @@
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
+
+{% extends 'base.html' %}
+
+{% block title %} Mark sheet {% endblock%}
+
+{% block content %}
+<div style="text-align:center">
+    <h1> STUDENT MARKS SHEET </h1>
+    <p><b>Name:</b> {{ student.name }}</p> 
+    <p><b>Registeration Number:</b> {{ student.registeration_number}}</p>
+    <p><b>Course:</b> {{ student.major_course_of_study}}</p>
+    <p><b>Class: </b>{{classes.class_name}}</p>
+</div>
+<hr>
+<h2 style="text-align:center"> RESULTS</h2>
+    <table class="table table-striped"  style="width:50%;margin:auto;">
+        <tr>
+            <th><b>Assesment </b></th>
+            <th><b>Marks</b></th>
+        </tr>
+        <tr>
+            <td> <b>CAT 1: </b></td> 
+            <td> {{classes.cat1}} </td>           
+        </tr> 
+        <tr>
+            <td> <b>CAT 2:</b> </td> 
+            <td> {{classes.cat2}} </td>           
+        </tr> 
+        <tr>
+            <td> <b>CAT 3: </b></td> 
+            <td> {{classes.cat3}} </td>           
+        </tr>
+        <tr>
+            <td> <b>FINAL EXAM:</b></td> 
+            <td> {{classes.final_exam}} </td>           
+        </tr>
+        <tr>
+            <td><b> Total Marks: </b></td> 
+            <td> {{ total_marks }} </td>           
+        </tr>
+
+
+    </table>
+
+
+
+    <hr>
+
+{% endblock%}

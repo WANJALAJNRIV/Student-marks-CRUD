@@ -1,18 +1,23 @@
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
+
 {% extends 'base.html' %}
 
 {% block title %} Student List {% endblock%}
 
 {% block content %}
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   
-    <button class="btn btn-primary" type="button" style="margin:20px;margin-right:20%"> <a href="{% url 'add_student' %}" class="link-dark">Add student</a> </button>
-  </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-primary" type="button" style="margin:20px;margin-right:20%">
+             <a href="{% url 'add_student' %}" class="link-dark">
+                <span class="badge text-bg-primary">Add student</span>
+                </a> </button>
+    </div>
 
 <h1> Student List </h1>
-<table class="table table-striped" style="margin:20px">
+<table class="table table-striped" style="margin:20px;text-align:center;">
     <tr>
-        <th>Id</th>
+        <th></th>
         <th> Name</th>
         <th>Registeration Number</th>
         <th> Major course of study </th>

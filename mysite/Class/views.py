@@ -1,3 +1,6 @@
+#Wanjala Stephen David
+# IN16/00055/20
+
 from django.shortcuts import render, redirect
 from .models import Class, ClassEnrollment
 from .forms import NewClassForm, EditClassForm
@@ -44,8 +47,6 @@ def delete_class(request, id):
     _class.delete()
     return redirect('list_classes')
     
-#############################################################
-
 
 def all_available_courses(request, id):
     courses = Student.objects.values('major_course_of_study').annotate(count=Count('id'))

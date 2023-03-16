@@ -1,4 +1,8 @@
- {% extends 'base.html' %}
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
+
+{% extends 'base.html' %}
+
 {%block title %} Home {% endblock %}
 
 {% block content %}
@@ -7,14 +11,14 @@
 <div class="card w-50" style="margin: 20px">
     <div class="card-body">
       <h5 class="card-title" ><a href="{% url 'list_students' %}" class="btn btn-primary"> Students</a></h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text">Student listing and management.</p>
     </div>
   </div>
 
   <div class="card w-50" style="margin: 20px">
     <div class="card-body">
       <h5 class="card-title"><a href="{% url 'list_units' %}" class="btn btn-primary"> Units  </a></h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text">Unit listing and management.</p>
     </div>
   </div>
 
@@ -23,7 +27,7 @@
   <div class="card w-50" style="margin: 20px">
     <div class="card-body">
       <h5 class="card-title"><a href="{% url 'list_classes' %}" class="btn btn-primary"> classes</a></h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text">Class listing and management..</p>
     </div>
   </div>
   

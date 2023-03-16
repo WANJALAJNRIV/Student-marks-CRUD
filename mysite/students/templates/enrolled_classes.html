@@ -1,19 +1,24 @@
-{% extends 'base.html' %}
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
 
+{% extends 'base.html' %}
 
 {% block title %} Student List {% endblock%}
 
 {% block content %}
 
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-primary" type="button" style="margin:20px;margin-right:20%">
+         <a href="{% url 'all_available_classes' id=student.id %}" class="link-dark">
+            <span class="badge text-bg-primary">Add to class</span>
+        </a> </button>
+</div>
 
-    <td>
-        <a href={% url 'all_available_classes' id=student.id %}> Add to class</a>
-    </td>
-
+    
     {% if classes %}
-<table class="table table-striped">
+<table class="table table-striped" style="text-align:center">
     <tr>
-        <th># </th>
+        <th> </th>
         <th> Name </th>
         <th>Registeration Number</th>
         <th> Class Name</th>
@@ -39,6 +44,10 @@
             <td>
                 <a href={% url 'add_marks' id=class.id %}> Add </a>
             </td> 
+            <td>
+                <a href={% url 'generate_mark_sheet' student_id=student.id class_id=class.id  %}> Generate </a>
+            </td> 
+
         </tr>
         {% endfor %}
     {% else%}

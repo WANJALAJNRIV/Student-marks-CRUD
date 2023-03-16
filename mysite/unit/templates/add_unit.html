@@ -1,5 +1,9 @@
-{% extends 'base.html' %}
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
 
+
+
+{% extends 'base.html' %}
 
 {% block title %} Student List {% endblock%}
 
@@ -8,11 +12,23 @@
 
 <h1>Add Unit</h1>
 
-<form action = "" method = "post">
-  {% csrf_token %}
-  {{ form.as_p }}
- 
-  <input type="submit" value= "Submit">
-</form>
+<div style="background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 50%; 
+            margin: auto;">
+  <form method="POST" style="display: flex; flex-direction: column;">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <button type="submit" style="background-color: #007bff;
+                                  color: #fff; 
+                                  padding: 10px;
+                                  font-size: 16px;
+                                  border-radius: 5px;
+                                  border: none;
+                                  margin:10px;
+                                  cursor: pointer;">Submit</button>
+  </form>
+</div>
 
 {% endblock %}

@@ -1,14 +1,32 @@
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
 
 
-<button><a href='{% url 'list_students' %}' >Students</a></button>
-<button><a href = '{% url 'list_classes' %}' > Classes</a></button>
-<button><a  href = '{% url 'list_units' %}' > Units</a></button>
-<hr>
+{% extends 'base.html' %}
+
+{% block title %} Add Marks {% endblock%}
+
+{% block content %}
+
 
 <h1>Update Student</h1>
+<div style="background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 50%; 
+            margin: auto;">
+  <form method="POST" style="display: flex; flex-direction: column;">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <button type="submit" style="background-color: #007bff;
+                                  color: #fff; 
+                                  padding: 10px;
+                                  font-size: 16px;
+                                  border-radius: 5px;
+                                  border: none;
+                                  margin:10px;
+                                  cursor: pointer;">Submit</button>
+  </form>
+</div>
 
-<form action = "" method = "post">
-  {% csrf_token %}
-  {{ form.as_table }}
-  <input type="submit" value= "Submit">
-</form>
+{% endblock %}

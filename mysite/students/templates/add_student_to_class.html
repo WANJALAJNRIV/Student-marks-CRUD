@@ -1,15 +1,15 @@
-{% load static %}
-<Link rel="stylesheet" type="text/css" href="{% static 'student/css/student_list.css' %}">
+<!--Wanjala Stephen David-->
+<!-- IN16/00055/20-->
+ 
+{% extends 'base.html' %}
 
+{% block title %} Add to Class {% endblock%}
 
-    <button><a href='{% url 'list_students' %}' >Students</a></button>
-        <button><a href = '{% url 'list_classes' %}' > Classes</a></button>
-        <button><a  href = '{% url 'list_units' %}' > Units</a></button>
-    <hr>
+{% block content %}
 
-<table>
+<table class="table table-striped" style="margin:20px;text-align:center">
     <tr>
-        <th>Id</th>
+        <th></th>
         <th> Class Name</th>
         <th>Unit Code</th>
         <th> Add to class </th>
@@ -29,6 +29,7 @@
     {% endfor %}
 </table>
 
+{% endblock %}
     
 
 
